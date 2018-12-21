@@ -1,2 +1,3 @@
-# fullstack
-fullstack tutorial
+# fullstack app
+
+fullstack app on angular and express
