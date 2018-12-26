@@ -11,8 +11,9 @@ const positionRoutes = require('./routes/position')
 const keys = require('./config/keys')
 const app = express()
 
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB connected', keys.mongoURI))
+const opt = { useNewUrlParser: true }
+mongoose.connect(keys.mongoURI, opt)
+  .then(() => console.log('MongoDB connected to:', keys.mongoURI))
   .catch(error => console.log(error))
 
 app.use(passport.initialize())
