@@ -32,7 +32,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   const body = req.body
-  const candidate = await User.find({email: body.email})
+  const candidate = await User.findOne({email: body.email})
   if (candidate) {
     res.status(409).json({
       message: 'This email is reserved, try another one'
