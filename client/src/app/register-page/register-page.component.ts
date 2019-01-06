@@ -2,7 +2,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { MaterialService } from '../shared/classes/material.service';
 
 @Component({
   selector: 'app-register-page',
@@ -14,8 +15,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   aSub: Subscription;
   constructor(
     private auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {
   }
 
@@ -41,7 +41,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
         }
       }),
       error => {
-        console.warn(error);
+        MaterialService.toast(error.error.message);
         this.form.enable();
       }
     );
