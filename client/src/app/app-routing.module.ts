@@ -1,3 +1,4 @@
+import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
   ]
   },
   {path: '', component: SiteLayoutComponent, canActivate: [AuthGuard], children: [
-
+    {path: 'overview', component: OverviewPageComponent}
     ]
   }
 ];
