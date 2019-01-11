@@ -4,7 +4,3 @@ module.exports = (res, error) => {
     message: error.message ? error.message : error
   })
 }
-
-module.exports = (req, res) => {
-  res.status(404).send({ error: 'unknown endpoint' })
-}

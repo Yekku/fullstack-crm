@@ -1,7 +1,7 @@
 const Position = require('../models/Position')
 const errorHandler = require('../utils/errorHandler')
 
-const getByCategoryId = async (req, res) => {
+module.exports.getByCategoryId = async function(req, res) {
   try {
     const positions = await Position.find({
       category: req.params.categoryId,
@@ -13,7 +13,7 @@ const getByCategoryId = async (req, res) => {
   }
 }
 
-const create = async (req, res) => {
+module.exports.create = async function(req, res) {
   try {
     const position = await new Position({
       name: req.body.name,
@@ -27,33 +27,26 @@ const create = async (req, res) => {
   }
 }
 
-const update = async (req, res) => {
+module.exports.remove = async function(req, res) {
   try {
-    const position = await Position.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: req.body },
-      { new: true }
-    )
-    res.status(200).json(position)
-  } catch (e) {
-    errorHandler(res, e)
-  }
-}
-
-const remove = async (req, res) => {
-  try {
-    await Position.delete({_id: req.params.id})
+    await Position.remove({_id: req.params.id})
     res.status(200).json({
-      message: 'Position removed success'
+      message: 'Позиция была удалена.'
     })
   } catch (e) {
     errorHandler(res, e)
   }
 }
 
-module.exports = {
-  getByCategoryId,
-  create,
-  update,
-  remove
+module.exports.update = async function(req, res) {
+  try {
+    const position = await Position.findOneAndUpdate(
+      {_id: req.params.id},
+      {$set: req.body},
+      {new: true}
+    )
+    res.status(200).json(position)
+  } catch (e) {
+    errorHandler(res, e)
+  }
 }

@@ -1,9 +1,0 @@
-POST http://localhost:3003/api/blogs
-content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjViZGI3NDExYjBlOTExMGQ3ZjMwYTA1MiIsImlhdCI6MTU0MTI1NzE0NH0.NEYqeKvtfUvsX-yvQQhaxYj0zdmiYClRnNaEXF0Uf1Y
-
-{
-  "title": "First class tests for node",
-  "author": "Robert C. Martin",
-  "url": "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll"
-}

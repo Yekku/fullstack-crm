@@ -1,7 +1,7 @@
-import { MaterialService } from './../../classes/material.service';
-import { AuthService } from './../../services/auth.service';
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
+import {MaterialService} from '../../classes/material.service';
 
 @Component({
   selector: 'app-site-layout',
@@ -9,19 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./site-layout.component.css']
 })
 export class SiteLayoutComponent implements AfterViewInit {
+
   @ViewChild('floating') floatingRef: ElementRef;
+
   links = [
-    { url: '/overview', name: 'Overview' },
-    { url: '/analytics', name: 'Analytics' },
-    { url: '/history', name: 'History' },
-    { url: '/order', name: 'Add order' },
-    { url: '/categories', name: 'Assortment' }
+    {url: '/overview', name: 'Overview'},
+    {url: '/analytics', name: 'Analytics'},
+    {url: '/history', name: 'History'},
+    {url: '/order', name: 'Add order'},
+    {url: '/categories', name: 'Assortment'}
   ];
 
-  constructor(
-    private auth: AuthService,
-    private router: Router
-  ) { }
+  constructor(private auth: AuthService,
+              private router: Router) {
+  }
 
   ngAfterViewInit() {
     MaterialService.initializeFloatingButton(this.floatingRef);

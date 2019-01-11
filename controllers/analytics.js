@@ -2,7 +2,7 @@ const moment = require('moment')
 const Order = require('../models/Order')
 const errorHandler = require('../utils/errorHandler')
 
-const overview = async (req, res) => {
+module.exports.overview = async function(req, res) {
   try {
     const allOrders = await Order.find({user: req.user.id}).sort({date: 1})
     const ordersMap = getOrdersMap(allOrders)
@@ -52,7 +52,7 @@ const overview = async (req, res) => {
   }
 }
 
-const analytics = async (req, res) => {
+module.exports.analytics = async function(req, res) {
   try {
     const allOrders = await Order.find({user: req.user.id}).sort({date: 1})
     const ordersMap = getOrdersMap(allOrders)
@@ -75,7 +75,7 @@ const analytics = async (req, res) => {
   }
 }
 
-const getOrdersMap = (orders = []) => {
+function getOrdersMap(orders = []) {
   const daysOrders = {}
   orders.forEach(order => {
     const date = moment(order.date).format('DD.MM.YYYY')
@@ -93,16 +93,11 @@ const getOrdersMap = (orders = []) => {
   return daysOrders
 }
 
-const calculatePrice = (orders = []) => {
+function calculatePrice(orders = []) {
   return orders.reduce((total, order) => {
     const orderPrice = order.list.reduce((orderTotal, item) => {
       return orderTotal += item.cost * item.quantity
     }, 0)
     return total += orderPrice
   }, 0)
-}
-
-module.exports = {
-  overview,
-  analytics
 }

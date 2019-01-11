@@ -1,9 +1,9 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { AuthService } from '../shared/services/auth.service';
-import { Router } from '@angular/router';
-import { MaterialService } from '../shared/classes/material.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../shared/services/auth.service';
+import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {MaterialService} from '../shared/classes/material.service';
 
 @Component({
   selector: 'app-register-page',
@@ -11,12 +11,12 @@ import { MaterialService } from '../shared/classes/material.service';
   styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent implements OnInit, OnDestroy {
+
   form: FormGroup;
   aSub: Subscription;
-  constructor(
-    private auth: AuthService,
-    private router: Router
-  ) {
+
+  constructor(private auth: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -35,11 +35,13 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.form.disable();
     this.aSub = this.auth.register(this.form.value).subscribe(
-      () => this.router.navigate(['/login'], {
-        queryParams: {
-          registered: true
-        }
-      }),
+      () => {
+        this.router.navigate(['/login'], {
+          queryParams: {
+            registered: true
+          }
+        });
+      },
       error => {
         MaterialService.toast(error.error.message);
         this.form.enable();

@@ -1,9 +1,9 @@
-import { AuthService } from './../shared/services/auth.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router, Params } from '@angular/router';
-import { MaterialService } from '../shared/classes/material.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../shared/services/auth.service';
+import {Subscription} from 'rxjs';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {MaterialService} from '../shared/classes/material.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,11 +14,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   aSub: Subscription;
-  constructor(
-    private auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
-    ) {
+
+  constructor(private auth: AuthService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -26,13 +25,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)])
     });
+
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
-        MaterialService.toast('Now you can login to application');
+        MaterialService.toast('Now you can login');
       } else if (params['accessDenied']) {
-        MaterialService.toast('For start, you need to log in');
+        MaterialService.toast('Login for start use app');
       } else if (params['sessionFailed']) {
-        MaterialService.toast('You need to log in');
+        MaterialService.toast('Please, login to app');
       }
     });
   }
@@ -45,6 +45,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.form.disable();
+
     this.aSub = this.auth.login(this.form.value).subscribe(
       () => this.router.navigate(['/overview']),
       error => {

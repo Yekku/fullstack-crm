@@ -2,7 +2,7 @@ const Category = require('../models/Category')
 const Position = require('../models/Position')
 const errorHandler = require('../utils/errorHandler')
 
-const getAll = async (req, res) => {
+module.exports.getAll = async function(req, res) {
   try {
     const categories = await Category.find({user: req.user.id})
     res.status(200).json(categories)
@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
   }
 }
 
-const getById = async (req, res) => {
+module.exports.getById = async function(req, res) {
   try {
     const category = await Category.findById(req.params.id)
     res.status(200).json(category)
@@ -20,7 +20,19 @@ const getById = async (req, res) => {
   }
 }
 
-const create = async (req, res) => {
+module.exports.remove = async function(req, res) {
+  try {
+    await Category.remove({_id: req.params.id})
+    await Position.remove({category: req.params.id})
+    res.status(200).json({
+      message: 'Категория удалена.'
+    })
+  } catch (e) {
+    errorHandler(res, e)
+  }
+}
+
+module.exports.create = async function(req, res) {
   const category = new Category({
     name: req.body.name,
     user: req.user.id,
@@ -35,7 +47,7 @@ const create = async (req, res) => {
   }
 }
 
-const update = async (req, res) => {
+module.exports.update = async function(req, res) {
   const updated = {
     name: req.body.name
   }
@@ -54,24 +66,4 @@ const update = async (req, res) => {
   } catch (e) {
     errorHandler(res, e)
   }
-}
-
-const remove = async (req, res) => {
-  try {
-    await Category.delete({ _id: req.params.id })
-    await Position.delete({ category: req.params.id })
-    res.status(200).json({
-      message: 'Category removed success'
-    })
-  } catch (e) {
-    errorHandler(res, e)
-  }
-}
-
-module.exports = {
-  getAll,
-  getById,
-  create,
-  update,
-  remove
 }
