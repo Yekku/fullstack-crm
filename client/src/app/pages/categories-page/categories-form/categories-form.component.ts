@@ -1,11 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoriesService} from '../../shared/services/categories.service';
+import {CategoriesService} from '../../../shared/services/categories.service';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {MaterialService} from '../../shared/classes/material.service';
-import {Category} from '../../shared/interfaces';
+import {MaterialService} from '../../../shared/classes/material.service';
+import {Category} from '../../../shared/interfaces';
 
 @Component({
   selector: 'app-categories-form',
@@ -17,7 +17,7 @@ export class CategoriesFormComponent implements OnInit {
   @ViewChild('input') inputRef: ElementRef;
   form: FormGroup;
   image: File;
-  imagePreview = '';
+  imagePreview = null;
   isNew = true;
   category: Category;
 

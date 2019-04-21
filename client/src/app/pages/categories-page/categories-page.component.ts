@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from '../../shared/services/categories.service';
-import {Observable} from 'rxjs/index';
 import {Category} from '../../shared/interfaces';
+import {Observable} from 'rxjs';
 
 @Component({
-  selector: 'app-order-categories',
-  templateUrl: './order-categories.component.html',
-  styleUrls: ['./order-categories.component.css']
+  selector: 'app-categories-page',
+  templateUrl: './categories-page.component.html',
+  styleUrls: ['./categories-page.component.css']
 })
-export class OrderCategoriesComponent implements OnInit {
+export class CategoriesPageComponent implements OnInit {
 
   categories$: Observable<Category[]>;
 

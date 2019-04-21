@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
-import {Filter} from '../../shared/interfaces';
-import {MaterialDatepicker, MaterialService} from '../../shared/classes/material.service';
+import {Filter} from '../../../shared/interfaces';
+import {MaterialDatepicker, MaterialService} from '../../../shared/classes/material.service';
 
 @Component({
   selector: 'app-history-filter',

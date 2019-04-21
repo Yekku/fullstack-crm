@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
-import {MaterialInstance, MaterialService} from '../shared/classes/material.service';
+import {MaterialInstance, MaterialService} from '../../shared/classes/material.service';
 import {OrderService} from './order.service';
-import {Order, OrderPosition} from '../shared/interfaces';
-import {OrdersService} from '../shared/services/orders.service';
+import {Order, OrderPosition} from '../../shared/interfaces';
+import {OrdersService} from '../../shared/services/orders.service';
 import {Subscription} from 'rxjs';
 
 @Component({

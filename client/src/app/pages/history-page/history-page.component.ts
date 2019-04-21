@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MaterialInstance, MaterialService} from '../shared/classes/material.service';
-import {OrdersService} from '../shared/services/orders.service';
+import {MaterialInstance, MaterialService} from '../../shared/classes/material.service';
+import {OrdersService} from '../../shared/services/orders.service';
 import {Subscription} from 'rxjs';
-import {Filter, Order} from '../shared/interfaces';
+import {Filter, Order} from '../../shared/interfaces';
 
 const STEP = 2;
 
